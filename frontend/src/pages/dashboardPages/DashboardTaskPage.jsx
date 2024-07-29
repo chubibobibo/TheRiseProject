@@ -51,7 +51,7 @@ function DashboardTaskPage() {
           >
             Tasks
           </span>
-          <Link to='/dashboard/view-dashboard'>Index</Link>
+          {/* <Link to='/dashboard/view-dashboard'>Index</Link> */}
           <div className='category'></div>
           {/* dynamically renders the TaskModal component depending on the state of isOpen */}
           {/* at the same time passes setIsOpen as props to be able to set the state in TaskModal component */}

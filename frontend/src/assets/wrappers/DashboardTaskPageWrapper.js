@@ -6,6 +6,7 @@ const Wrapper = styled.div`
   background-color: #1c1f26;
   height: 94vh;
   width: 100%;
+  overflow-x: hidden;
 
   /** container for the main navbar */
   /** takes up the whole width of the page */
