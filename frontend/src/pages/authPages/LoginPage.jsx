@@ -74,7 +74,7 @@ function LoginPage() {
         <div className='link-register'>
           <span>
             You don't have an account?{" "}
-            <Link className='links'>
+            <Link to='/register' className='links'>
               <span className='link-label'>Register</span>
             </Link>
           </span>

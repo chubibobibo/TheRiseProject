@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
 
-  height: 100vh;
+  height: 100%;
   max-width: 100vw;
   overflow-y: scroll;
   overflow-x: scroll;
@@ -21,7 +21,7 @@ const Wrapper = styled.div`
   .login-container {
     background-color: #252932;
     width: 30%;
-    height: 50%;
+    height: 50rem;
     border-radius: 10px;
     margin-top: 1rem;
   }
@@ -123,7 +123,7 @@ const Wrapper = styled.div`
   .login-extra {
     margin-top: 1rem;
     width: 30%;
-    height: 50%;
+    height: 50rem;
     border-radius: 10px;
     margin-bottom: 1rem;
   }
