@@ -80,7 +80,27 @@ function LoginPage() {
           </span>
         </div>
       </div>
-      <div className='login-extra'></div>
+      {/**footer */}
+      <div className='login-extra'>
+        <div className='bottom-header'>
+          <p>Log in as</p>
+        </div>
+        <div className='bottom-content-name'>
+          <p>Admin</p>
+          <p>admin@demo.com</p>
+          <p>riseDemo</p>
+        </div>
+        <div className='bottom-content-name2'>
+          <p>Client</p>
+          <p>client@demo.com</p>
+          <p>riseDemo</p>
+        </div>
+
+        <div className='bottom-content-footer'>
+          To check team members, use the email addresses from the Team members
+          list. Password is same riseDemo.
+        </div>
+      </div>
     </Wrapper>
   );
 }
