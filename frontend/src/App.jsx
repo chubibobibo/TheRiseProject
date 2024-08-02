@@ -19,6 +19,8 @@ import TasksPage from "./pages/dashboardPages/TasksPage";
 
 /** action functions */
 import { action as loginAction } from "./pages/authPages/LoginPage";
+import { action as registerAction } from "./pages/authPages/RegisterPage";
+import { loader as getAllClientsLoader } from "./components/clientPageElements/ClientPageContent";
 
 function App() {
   const router = createBrowserRouter([
@@ -35,6 +37,7 @@ function App() {
         {
           path: "register",
           element: <RegisterPage />,
+          action: registerAction,
         },
         {
           /**
@@ -73,6 +76,7 @@ function App() {
             {
               path: "clients-clients",
               element: <ClientPageClient />,
+              loader: getAllClientsLoader,
             },
             {
               path: "clients-contacts",

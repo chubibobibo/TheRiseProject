@@ -14,11 +14,12 @@ export const action = async ({ request }) => {
     return redirect("/dashboard");
   } catch (err) {
     console.log(err);
-    toast.error(
-      Array.isArray(err?.response?.data?.message)
-        ? err?.response?.data?.message[0]
-        : err?.response?.data?.message
-    );
+    // toast.error(
+    //   Array.isArray(err?.response?.data?.message)
+    //     ? err?.response?.data?.message[0]
+    //     : err?.response?.data?.message
+    // );
+    toast.error(err?.response?.data);
     return err;
   }
 };
@@ -74,7 +75,7 @@ function LoginPage() {
         <div className='link-register'>
           <span>
             You don't have an account?{" "}
-            <Link className='links'>
+            <Link to='/register' className='links'>
               <span className='link-label'>Register</span>
             </Link>
           </span>
