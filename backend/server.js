@@ -15,6 +15,7 @@ import passport from "passport";
 
 /** route imports */
 import userRoutes from "./routes/authRoutes.js";
+import clientRoutes from "./routes/clientRoutes.js";
 
 app.use(express.json()); /** parsing json data */
 app.use(cors());
@@ -33,7 +34,7 @@ async function main() {
 const store = new MongoStore({
   mongoUrl: process.env.MONGO_URL,
   secret: process.env.STORE_SECRET,
-  touchAfter: 24 * 60 * 60,
+  // touchAfter: 24 * 60 * 60,
 });
 
 /** listens for session errors */
@@ -65,11 +66,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /** verifying if req.user that contains user data (from session) is created for every request*/
-app.use((req, res, next) => {
-  console.log(req.user);
-  console.log(req.session);
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log(req.user);
+//   console.log(req.session);
+//   next();
+// });
 
 /** specify the strategy to be used in passport */
 /** @UserModel passport-local-mongoose strategy was implemented*/
@@ -82,6 +83,7 @@ passport.deserializeUser(UserModel.deserializeUser());
 
 /** routes */
 app.use("/api/auth/", userRoutes);
+app.use("/api/clients/", clientRoutes);
 
 /** error handling */
 /** handling errors for page not found */
