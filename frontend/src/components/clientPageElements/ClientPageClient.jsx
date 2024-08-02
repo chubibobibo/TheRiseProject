@@ -4,6 +4,8 @@ import ClientPageHeader from "../../components/clientPageElements/ClientPageHead
 import ClientPageControls from "./ClientPageControls.jsx";
 import ClientPageContent from "./ClientPageContent.jsx";
 
+import ClientPageModal from "./ClientPageModal.jsx";
+
 function ClientPageClient() {
   return (
     <Wrapper>
