@@ -1,8 +1,12 @@
 import mongoose from "mongoose";
 
 import { UserModel } from "./UserSchema.js";
+import { SalesModel } from "./SalesSchema.js";
+import { ProjectModel } from "./ProjectSchema.js";
 
 import fs from "fs";
+import { PaymentModel } from "./PaymentSchema.js";
+import { InvoiceModel } from "./InvoiceSchema.js";
 
 /** save json file to a variable */
 const rawCode = fs.readFileSync("./utils/currencies.json");
@@ -78,6 +82,22 @@ const ClientSchema = new Schema({
   },
   label: {
     type: String,
+  },
+  sales: {
+    type: Schema.Types.ObjectId,
+    ref: SalesModel,
+  },
+  project: {
+    type: Schema.Types.ObjectId,
+    ref: ProjectModel,
+  },
+  payments: {
+    type: Schema.Types.ObjectId,
+    ref: PaymentModel,
+  },
+  invoice: {
+    type: Schema.Types.ObjectId,
+    ref: InvoiceModel,
   },
 });
 

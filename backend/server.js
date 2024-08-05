@@ -16,6 +16,9 @@ import passport from "passport";
 /** route imports */
 import userRoutes from "./routes/authRoutes.js";
 import clientRoutes from "./routes/clientRoutes.js";
+import invoiceRoutes from "./routes/invoiceRoutes.js";
+import paymentRoutes from "./routes/paymentRoutes.js";
+import projectRoutes from "./routes/projectRoutes.js";
 
 app.use(express.json()); /** parsing json data */
 app.use(cors());
@@ -84,6 +87,9 @@ passport.deserializeUser(UserModel.deserializeUser());
 /** routes */
 app.use("/api/auth/", userRoutes);
 app.use("/api/clients/", clientRoutes);
+app.use("/api/invoice/", invoiceRoutes);
+app.use("/api/payment/", paymentRoutes);
+app.use("/api/project/", projectRoutes);
 
 /** error handling */
 /** handling errors for page not found */
