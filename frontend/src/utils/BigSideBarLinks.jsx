@@ -46,7 +46,7 @@ export const bigSideBarLinks = [
     label: "Sales",
   },
   {
-    path: "/dashboard/propspects",
+    path: "/dashboard/prospects",
     icon: <BiCategory />,
     label: "Prospects",
   },

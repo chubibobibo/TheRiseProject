@@ -16,11 +16,13 @@ import DashboardIndexPage from "./pages/dashboardPages/DashboardIndexPage";
 import ClientPageClient from "./components/clientPageElements/ClientPageClient";
 import ClientPageContacts from "./components/clientPageElements/ClientPageContacts";
 import TasksPage from "./pages/dashboardPages/TasksPage";
+import SalesPage from "./pages/dashboardPages/SalesPage";
 
 /** action functions */
 import { action as loginAction } from "./pages/authPages/LoginPage";
 import { action as registerAction } from "./pages/authPages/RegisterPage";
 import { loader as getAllClientsLoader } from "./components/clientPageElements/ClientPageContent";
+import { loader as getPaymentLoader } from "./pages/dashboardPages/SalesPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -81,6 +83,11 @@ function App() {
             {
               path: "clients-contacts",
               element: <ClientPageContacts />,
+            },
+            {
+              path: "sales",
+              element: <SalesPage />,
+              loader: getPaymentLoader,
             },
           ],
         },
