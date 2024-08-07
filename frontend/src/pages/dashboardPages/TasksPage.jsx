@@ -18,6 +18,7 @@ import { IoAddCircleOutline } from "react-icons/io5";
 /** import of component that displays each task */
 import TaskElements from "../../components/tasksElements/TaskElements.jsx";
 import TaskPageModal from "../../components/tasksElements/TaskPageModal.jsx";
+import AddTaskModal from "../../components/tasksElements/AddTaskModal.jsx";
 
 /**react icons */
 import { BsExclamationCircle } from "react-icons/bs";
@@ -29,6 +30,7 @@ import { Link } from "react-router-dom";
 
 /**creating context to pass data */
 export const TaskContext = createContext();
+export const AddTaskContext = createContext();
 
 function TasksPage() {
   /** State to open and close modal dialog component */
@@ -38,6 +40,12 @@ function TasksPage() {
   const handleClick = (id) => {
     setIsOpen({ open: true, taskId: id });
   };
+  /** State to handle display of add task modal */
+  const [isAddModal, setIsAddModal] = useState(false);
+  const handleAddTaskClick = () => {
+    setIsAddModal(!isAddModal);
+  };
+
   return (
     <Wrapper>
       {/** wrap the components that needs data inside the context provider */}
@@ -57,7 +65,7 @@ function TasksPage() {
                 </button>
               </Link>
               <Link className='task-btn-link'>
-                <button className='add-task-btn'>
+                <button className='add-task-btn' onClick={handleAddTaskClick}>
                   <IoAddCircleOutline size={"1.5rem"} />
                   Add task
                 </button>
@@ -71,6 +79,11 @@ function TasksPage() {
           {/* NOTE: isOpen.open for conditional rendering. Otherwise modal will be active every render of the component */}
           {/* passed isOpen state as argument to obtain id of task needed to display data*/}
           {isOpen.open && <TaskPageModal />}
+          <AddTaskContext.Provider
+            value={{ isAddMOdal: isAddModal, setIsAddModal: setIsAddModal }}
+          >
+            {isAddModal && <AddTaskModal />}
+          </AddTaskContext.Provider>
 
           {/* column of navigation buttons */}
           <div className='button-row'>
