@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   justify-items: start;
   transform: translateY(1rem) translateX(1rem);
   max-width: 98%;
+  align-items: center;
 
   .client-links {
     display: flex;
@@ -40,15 +41,32 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: end;
     gap: 1rem;
-    margin: 1.5rem;
-    margin-left: 30rem;
-    max-width: 50%;
+    /* margin: 1.5rem; */
+    margin-left: 35%;
+    max-width: 60%;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     .links {
       text-decoration: none;
       color: white;
     }
+  }
+
+  .add-client {
+    width: 9rem;
+    height: 3rem;
+    border-radius: 10px;
+    background-color: #2f3541;
+    color: #888ea8;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .add-client:hover {
+    background-color: black;
   }
 `;
 

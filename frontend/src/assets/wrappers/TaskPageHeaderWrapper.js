@@ -16,8 +16,10 @@ const Wrapper = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "links buttons";
   justify-items: start;
-  transform: translateY(1rem) translateX(1rem);
-  max-width: 98%;
+  transform: translateY(1rem);
+  width: 95%;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 
   .task-links {
     display: flex;

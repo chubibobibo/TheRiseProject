@@ -5,11 +5,13 @@ import "./index.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-/** Create  a new isntance of query */
+// import StatusProvider from "./utils/StatusProvider.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    {/* <StatusProvider> */}
     <App />
+    {/* </StatusProvider> */}
     <ToastContainer position='top-center' />
   </React.StrictMode>
 );

@@ -5,14 +5,19 @@ import Wrapper from "../../assets/wrappers/ClientPageContactsWrapper.js";
 import { contacts } from "../../utils/Contacts";
 import { customStyles } from "../../utils/styles/customTableStyle.js";
 
+import { StatusContext } from "../../utils/StatusProvider.jsx";
+import { useContext } from "react";
+
 /** importing table component */
 /** provides a table component that can be setup */
 import DataTable from "react-data-table-component";
 
 /** importing components to be rendered */
 import ClientPageHeader from "../../components/clientPageElements/ClientPageHeader";
+import ClientPageModal from "./ClientPageModal.jsx";
 
 function ClientPageContacts() {
+  const contextData = useContext(StatusContext);
   /** columns for the table */
   const columns = [
     // {
@@ -58,6 +63,7 @@ function ClientPageContacts() {
           customStyles={customStyles}
           pagination
         />
+        {contextData.isOpen && <ClientPageModal />}
       </div>
     </Wrapper>
   );

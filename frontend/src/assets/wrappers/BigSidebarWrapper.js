@@ -7,7 +7,8 @@ const Wrapper = styled.aside`
   flex-direction: column;
   box-shadow: 1px 0px 0px 0px rgba(0, 0, 0, 0.1);
   background: #252932;
-  width: 15rem;
+  margin-right: 2rem;
+  width: 100%;
   height: 94vh;
   overflow-y: scroll; /** scroll side bar on overflow */
   /* position: absolute; */
@@ -21,6 +22,20 @@ const Wrapper = styled.aside`
     cursor: pointer;
     display: flex;
     align-items: center;
+  }
+
+  .toggle-btn:focus {
+    color: #1c2db6;
+    background-color: #1c1f26;
+    border-radius: 10px;
+  }
+  .toggle-btn:active {
+    color: blue;
+    background-color: #1c1f26;
+    border-radius: 10px;
+  }
+  .toggle-btn:hover {
+    color: #1c2db6;
   }
 `;
 

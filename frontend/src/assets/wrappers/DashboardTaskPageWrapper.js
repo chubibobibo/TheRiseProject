@@ -15,6 +15,63 @@ const Wrapper = styled.div`
     /* height: 20rem; */
   }
 
+  .taskHeader {
+    background-color: #252932;
+    height: 5rem;
+    border-bottom: 1px solid gray;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+    .links-right {
+      display: flex;
+      text-decoration: none;
+
+      .add-task-btn {
+        width: 7rem;
+        height: 3rem;
+        border-color: transparent;
+        background-color: #2f3541;
+        border-radius: 10px;
+        color: #888ea8;
+        margin-right: 1rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        text-decoration: none;
+      }
+
+      .add-mult-task-btn {
+        width: 10rem;
+        height: 3rem;
+        border-color: transparent;
+        background-color: #2f3541;
+        border-radius: 10px;
+        color: #888ea8;
+        margin-right: 1rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        text-decoration: none;
+      }
+
+      .add-task-btn:hover {
+        background-color: black;
+      }
+      .add-mult-task-btn:hover {
+        background-color: black;
+      }
+
+      .task-btn-link {
+        text-decoration: none;
+      }
+    }
+  }
+
   /** Contains the buttons, icons and user avatar */
   .button-row {
     background-color: #252932;

@@ -4,7 +4,11 @@ import { rateLimit } from "express-rate-limit";
 
 const router = express.Router();
 
-import { register, login } from "../controllers/authController.js";
+import {
+  register,
+  login,
+  currentLoggedUser,
+} from "../controllers/authController.js";
 
 /** input validations */
 import {
@@ -22,6 +26,7 @@ const apiLimiter = rateLimit({
   message: "login attempt exceeded 3 tries. Try again after 15 minutes",
 });
 
+router.get("/currentLoggedUser", currentLoggedUser);
 router.post("/register", registerValidation, register);
 router.post(
   "/login",

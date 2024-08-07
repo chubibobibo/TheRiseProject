@@ -62,3 +62,14 @@ export const loginValidation = withValidationErrors([
     .isLength({ min: 8 })
     .withMessage("Password must be at least 8 characters"),
 ]);
+
+export const addClientValidation = withValidationErrors([
+  body("clientName").notEmpty().withMessage("client name cannot be empty"),
+  body("clientType").notEmpty().withMessage("client type cannot be empty"),
+  body("address").notEmpty().withMessage("address  cannot be empty"),
+  body("city").notEmpty().withMessage("city cannot be empty"),
+  body("state").notEmpty().withMessage("state cannot be empty"),
+  body("zip").notEmpty().withMessage("zip cannot be empty"),
+  body("country").notEmpty().withMessage("country cannot be empty"),
+  body("phone").notEmpty().withMessage("phone cannot be empty"),
+]);

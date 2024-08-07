@@ -15,6 +15,10 @@ import passport from "passport";
 
 /** route imports */
 import userRoutes from "./routes/authRoutes.js";
+import clientRoutes from "./routes/clientRoutes.js";
+import invoiceRoutes from "./routes/invoiceRoutes.js";
+import paymentRoutes from "./routes/paymentRoutes.js";
+import projectRoutes from "./routes/projectRoutes.js";
 
 app.use(express.json()); /** parsing json data */
 app.use(cors());
@@ -33,7 +37,7 @@ async function main() {
 const store = new MongoStore({
   mongoUrl: process.env.MONGO_URL,
   secret: process.env.STORE_SECRET,
-  touchAfter: 24 * 60 * 60,
+  // touchAfter: 24 * 60 * 60,
 });
 
 /** listens for session errors */
@@ -82,6 +86,10 @@ passport.deserializeUser(UserModel.deserializeUser());
 
 /** routes */
 app.use("/api/auth/", userRoutes);
+app.use("/api/clients/", clientRoutes);
+app.use("/api/invoice/", invoiceRoutes);
+app.use("/api/payment/", paymentRoutes);
+app.use("/api/project/", projectRoutes);
 
 /** error handling */
 /** handling errors for page not found */

@@ -47,6 +47,8 @@ const Wrapper = styled.nav`
   .username {
     margin: 1rem;
     color: #5b73e8;
+    font-weight: 500;
+    text-decoration: none;
   }
 
   @media (min-width: 992px) {

@@ -1,4 +1,7 @@
+import { Link } from "react-router-dom";
 import Wrapper from "../assets/wrappers/SmallSidebarWrapper.js";
+import { bigSideBarLinks } from "../utils/BigSideBarLinks.jsx";
+
 function SmallSidebarComponent() {
   return (
     <Wrapper>
@@ -10,14 +13,15 @@ function SmallSidebarComponent() {
       > */}
       <div className='show-sidebar sidebar-container'>
         <div className='content'>
-          {/* sets the showSidebar back to false to hide the sidebar */}
-          <button type='button' className='close-btn'>
-            hello
-          </button>
-          <button type='button' className='close-btn'>
-            hello
-          </button>
-          <header>hello</header>
+          {bigSideBarLinks.map((icons, idx) => {
+            return (
+              <Link key={idx} to={`${icons.path}`} className='link-container'>
+                <button type='button' className='icon-container'>
+                  {icons.icon}
+                </button>
+              </Link>
+            );
+          })}
         </div>
       </div>
       {/* </div> */}

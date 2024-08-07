@@ -1,71 +1,39 @@
 import styled from "styled-components";
 
 const Wrapper = styled.aside`
-  /* @media (min-width: 992px) {
-    display: none;
-  } */
-  /* .sidebar-container {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 0px 0px 0px rgba(0, 0, 0, 0.1);
+  background: #252932;
+  width: 100%;
+  height: 94vh;
+  overflow-y: scroll; /** scroll side bar on overflow */
+  /* position: absolute; */
+
+  .icon-container {
+    width: 3rem;
+    height: 3rem;
+    color: #898fa9;
+    margin: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: -1;
-    opacity: 0;
-    transition: 0.3s ease-in-out all;
-    visibility: hidden;
-  }
-  .show-sidebar {
-    z-index: 99;
-    opacity: 1;
-    visibility: visible;
-  }
-  .content {
-    background: blue;
-    width: 5rem;
-    height: 95vh;
-    border-radius: 1px;
-    padding: 4rem 2rem;
-    position: relative;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-  .close-btn {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: transparent;
+    background-color: transparent;
     border-color: transparent;
-    font-size: 2rem;
-    color: red;
     cursor: pointer;
   }
-  .nav-links {
-    padding-top: 2rem;
-    display: flex;
-    flex-direction: column;
+
+  .link-container:focus {
+    color: blue;
+    background-color: darkgray;
   }
-  .nav-link {
-    display: flex;
-    align-items: center;
-    color: white;
-    padding: 1rem 0;
-    text-transform: capitalize;
-    transition: 0.3s ease-in-out all;
+  .icon-container:active {
+    color: blue;
+    background-color: darkgray;
+    border-radius: 10px;
   }
-  .nav-link:hover {
-    color: white;
+  .icon-container:hover {
+    color: blue;
   }
-  .icon {
-    font-size: 1.5rem;
-    margin-right: 1rem;
-    display: grid;
-    place-items: center;
-  }
-  .active {
-    color: white;
-  } */
 `;
 export default Wrapper;

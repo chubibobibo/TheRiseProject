@@ -11,17 +11,53 @@ import ClientInvoice from "../../components/clientPageElements/ClientInvoice.jsx
 import ClientProjects from "../../components/clientPageElements/ClientProjects.jsx";
 import ClientTickets from "../../components/clientPageElements/ClientTickets.jsx";
 
+import { toast } from "react-toastify";
+import axios from "axios";
+import { useLoaderData } from "react-router-dom";
+
+import { useContext } from "react";
+import { StatusContext } from "../../utils/StatusProvider.jsx";
+import ClientPageModal from "../../components/clientPageElements/ClientPageModal.jsx";
+
+/** Loader function to obtain client data */
+/**loads 2 axios get requests all clients and openProjects*/
+export const loader = async () => {
+  try {
+    const [clientData, withOpenProjects] = await Promise.all([
+      axios.get("/api/clients/getAllClients"),
+      axios.get("/api/project/openProjects"),
+    ]);
+    return {
+      clientData: clientData,
+      withOpenProjects: withOpenProjects,
+    };
+  } catch (err) {
+    console.log(err);
+    toast.error(err?.response?.data?.message);
+    return err;
+  }
+};
+
 function ClientPage() {
+  const data = useLoaderData();
+  const contextData = useContext(StatusContext);
+  console.log(contextData);
+  // console.log(data.withOpenProjects);
+  // console.log(data.clientData.data.allClients);
+  const clients = data.clientData;
+  const clientNum = data.clientData.data.allClients.length;
+  // console.log(clients);
   return (
     <Wrapper>
       <ClientPageHeader />
       <div className='first-row-container'>
+        {contextData.isOpen && <ClientPageModal />}
         <div className='total-clients'>
           <div className='box-icon-container-blue'>
             <PiSuitcase size={"3rem"} color={"white"} />
           </div>
           <div className='icon-description'>
-            <p>50</p>
+            <p>{clientNum}</p>
             <span>Total clients</span>
           </div>
         </div>
@@ -30,7 +66,7 @@ function ClientPage() {
             <SlPeople size={"3rem"} color={"white"} />
           </div>
           <div className='icon-description'>
-            <p>50</p>
+            <p>{clientNum}</p>
             <span>Total contacts</span>
           </div>
         </div>
@@ -86,6 +122,7 @@ function ClientPage() {
             secondRow={"Clients has completed projects"}
             thirdRow={"Clients  has  hold projects"}
             fourthRow={"Clients  has canceled projects"}
+            clients={clients}
           />
         </div>
         <div className='estimates'>
