@@ -26,4 +26,53 @@ const TaskSchema = new Schema({
   //     type: String,
   //     enum:
   //   },
+
+  points: {
+    type: Number,
+    enum: [1, 2, 3, 4, 5],
+  },
+
+  milestone: {
+    type: String,
+  },
+
+  assignTo: {
+    type: String,
+  },
+
+  collaborators: {
+    type: String,
+  },
+
+  status: {
+    type: String,
+    enum: ["to do", "in progress", "review", "done"],
+  },
+
+  priority: {
+    type: String,
+    enum: ["minor", "major", "critical", "blocker"],
+  },
+
+  labels: {
+    type: String,
+  },
+
+  startDate: {
+    type: Date,
+    required: true,
+  },
+
+  deadline: {
+    type: Date,
+    required: true,
+  },
+
+  recurring: {
+    // type: String,
+    // enum: ["true", "false"],
+    type: Boolean,
+  },
 });
+
+export const TaskModel = new mongoose.model("TaskModel", TaskSchema);
