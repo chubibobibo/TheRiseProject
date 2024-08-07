@@ -4,6 +4,9 @@ import Wrapper from "../../assets/wrappers/ClientPageHeaderWrapper.js";
 
 import ClientPageModal from "./ClientPageModal";
 
+import { useContext } from "react";
+import { StatusContext } from "../../utils/StatusProvider.jsx";
+
 import { Link } from "react-router-dom";
 import { CiCirclePlus } from "react-icons/ci";
 import { CiExport } from "react-icons/ci";
@@ -12,7 +15,9 @@ import { FiTag } from "react-icons/fi";
 export const ClientPageContext = createContext();
 
 function ClientPageHeader() {
-  const [isOpen, setIsOpen] = useState(false);
+  const data = useContext(StatusContext);
+  // const [isOpen, setIsOpen] = useState(false);
+  console.log(data);
   return (
     <Wrapper>
       <div className='client-links'>
@@ -48,7 +53,7 @@ function ClientPageHeader() {
             <Link
               className='links'
               onClick={() => {
-                setIsOpen(true);
+                data.setIsOpen(true);
               }}
             >
               Add client
@@ -56,11 +61,11 @@ function ClientPageHeader() {
           </div>
         </div>
       </div>
-      <ClientPageContext.Provider
+      {/* <ClientPageContext.Provider
         value={{ isOpen: isOpen, setIsOpen: setIsOpen }}
       >
         {isOpen && <ClientPageModal />}
-      </ClientPageContext.Provider>
+      </ClientPageContext.Provider> */}
     </Wrapper>
   );
 }

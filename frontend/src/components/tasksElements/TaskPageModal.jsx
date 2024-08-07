@@ -13,19 +13,17 @@ import Wrapper from "../../assets/wrappers/ModalWrapper.js";
 import { TempTasks } from "../../utils/TempTasks.jsx";
 import { useState, useEffect, useContext } from "react";
 /**  context created in the parent component */
-import { DashboardTaskContext } from "../../pages/dashboardPages/DashboardTaskPage.jsx";
-// import { TaskContext } from "../../pages/dashboardPages/TasksPage.jsx";
+import { TaskContext } from "../../pages/dashboardPages/TasksPage.jsx";
 
 function TaskModal() {
   /** Create a state to manage the filtered data */
   const [filteredData, setFilteredData] = useState({});
 
   /** obtaining data from context */
-  const data = useContext(DashboardTaskContext);
-  // const newTaskData = useContext(TaskContext);
+  const newTaskData = useContext(TaskContext);
 
   /** save the taskId from context to a variable*/
-  const taskData = data.isOpen.taskId;
+  const taskData = newTaskData.isOpen.taskId;
 
   /** filter the array of objects that contains our temporary data for all tasks that is equal to the
    * id(taskData) received from context then set the state that will contain
@@ -46,14 +44,20 @@ function TaskModal() {
     <Wrapper>
       {/* using setIsOpen from context data to close the modal by setting isOpen to false*/}
       {/* setting setIsOpen in a div separate from the modal to close it when clicking outside the modal component */}
-      <div className='darkBG' onClick={() => data.setIsOpen(false)}></div>
+      <div
+        className='darkBG'
+        onClick={() => newTaskData.setIsOpen(false)}
+      ></div>
       <div className='centered'>
         <div className='modalHeader'>
           <h5 className='heading'>{filteredData[0]?.task}</h5>
         </div>
         <div className='modal'>
           {/* button to close */}
-          <button className='closeBtn' onClick={() => data.setIsOpen(false)}>
+          <button
+            className='closeBtn'
+            onClick={() => newTaskData.setIsOpen(false)}
+          >
             <RiCloseLine style={{ marginBottom: "-3px" }} />
           </button>
           {/** container for the task details */}

@@ -7,9 +7,14 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useLoaderData } from "react-router-dom";
 
+import ClientPageHeader from "../../components/clientPageElements/ClientPageHeader";
+import ClientPageModal from "./ClientPageModal.jsx";
+
 /** importing table component */
 /** provides a table component that can be setup */
 import DataTable from "react-data-table-component";
+import { useContext } from "react";
+import { StatusContext } from "../../utils/StatusProvider.jsx";
 
 /** loader function to obtain client data */
 export const loader = async () => {
@@ -35,68 +40,70 @@ function ClientPageContent() {
   const data = useLoaderData();
   console.log(data);
 
+  const contextData = useContext(StatusContext);
+
   /** columns for the table */
   const columns = [
     {
       name: "ID",
       selector: (row) => row._id,
-      sortable: true,
-      wrap: true,
+      sortable: "true",
+      wrap: "true,",
     },
     {
       name: "Name",
       selector: (row) => row.clientName,
-      sortable: true,
-      center: true,
+      sortable: "true",
+      center: "true",
     },
     {
       name: "Primary contact",
       selector: (row) => row.contact,
-      sortable: true,
-      center: true,
+      sortable: "true",
+      center: "true",
     },
     {
       name: "Phone",
       selector: (row) => row.phone,
-      sortable: true,
-      center: true,
+      sortable: "true",
+      center: "true",
     },
     {
       name: "Client groups",
       selector: (row) => row.clientGroup,
-      sortable: true,
-      wrap: true,
-      center: true,
+      sortable: "true",
+      wrap: "true",
+      center: " true",
     },
     {
       name: "Labels",
       selector: (row) => row.label,
-      sortable: true,
-      wrap: true,
-      center: true,
+      sortable: "true",
+      wrap: "true",
+      center: "true",
     },
     {
       name: "projects",
       selector: (row) => row.projects,
-      sortable: true,
+      sortable: "true",
     },
     {
       name: "Total invoiced",
       selector: (row) => row.totalInvoice,
-      sortable: true,
-      center: true,
+      sortable: " true",
+      center: "true",
     },
     {
       name: "Payment received",
       selector: (row) => row.receivedPayment,
-      sortable: true,
-      center: true,
+      sortable: "true",
+      center: "true",
     },
     {
       name: "Due",
       selector: (row) => row.due,
-      sortable: true,
-      center: true,
+      sortable: "true",
+      center: " true",
     },
   ];
 
@@ -110,6 +117,7 @@ function ClientPageContent() {
           pagination
           customStyles={customStyles}
         />
+        {contextData.isOpen && <ClientPageModal />}
       </div>
     </Wrapper>
   );

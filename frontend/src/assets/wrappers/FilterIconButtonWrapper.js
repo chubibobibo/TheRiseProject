@@ -8,6 +8,7 @@ const Wrapper = styled.button`
   margin: 1rem;
   color: #898fa9;
   cursor: pointer;
+  border-color: transparent;
   /** changes color to black with transition of half a sec. */
   &:hover {
     background-color: black;

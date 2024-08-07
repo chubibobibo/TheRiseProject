@@ -41,9 +41,9 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: end;
     gap: 1rem;
-    margin: 1.5rem;
-    margin-left: 30rem;
-    max-width: 50%;
+    /* margin: 1.5rem; */
+    margin-left: 35%;
+    max-width: 60%;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     .links {

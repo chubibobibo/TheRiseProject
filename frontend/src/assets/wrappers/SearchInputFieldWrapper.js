@@ -6,6 +6,7 @@ const Wrapper = styled.input`
   height: 2rem;
   margin: 0.5rem;
   width: 20rem;
+  border-color: transparent;
 `;
 
 export default Wrapper;

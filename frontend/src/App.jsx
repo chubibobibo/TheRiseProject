@@ -23,6 +23,8 @@ import { action as loginAction } from "./pages/authPages/LoginPage";
 import { action as registerAction } from "./pages/authPages/RegisterPage";
 import { loader as getAllClientsLoader } from "./components/clientPageElements/ClientPageContent";
 import { loader as getPaymentLoader } from "./pages/dashboardPages/SalesPage";
+import { loader as getAllClientsAndProjects } from "./pages/dashboardPages/ClientPage";
+import { loader as getCurrentLoggedUserLoader } from "./pages/DashboardLayout";
 
 function App() {
   const router = createBrowserRouter([
@@ -49,6 +51,7 @@ function App() {
           path: "dashboard",
           element: <DashboardLayout />,
           errorElement: <ErrorPageComponent />,
+          loader: getCurrentLoggedUserLoader,
           children: [
             {
               index: true,
@@ -74,6 +77,7 @@ function App() {
             {
               path: "clients",
               element: <ClientPage />,
+              loader: getAllClientsAndProjects,
             },
             {
               path: "clients-clients",
