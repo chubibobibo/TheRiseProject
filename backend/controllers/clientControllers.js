@@ -16,7 +16,7 @@ export const addClient = async (req, res) => {
 
 /** get all the clients */
 export const getAllClients = async (req, res) => {
-  const allClients = await ClientModel.find({});
+  const allClients = await ClientModel.find({}).populate("project");
   if (!allClients) {
     throw new ExpressError("Cannot find clients");
   }
@@ -25,3 +25,9 @@ export const getAllClients = async (req, res) => {
   }
   res.status(200).json({ message: "Found clients", allClients });
 };
+
+// /** get clients with open projects*/
+// export const clientsOpenProjects = async(req,res) => {
+//   const foundClient = await ClientModel.find({}).populate('projects')
+//   const withOpenProj =
+// }

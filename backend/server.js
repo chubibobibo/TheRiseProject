@@ -69,11 +69,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /** verifying if req.user that contains user data (from session) is created for every request*/
-// app.use((req, res, next) => {
-//   console.log(req.user);
-//   console.log(req.session);
-//   next();
-// });
+app.use((req, res, next) => {
+  console.log(req.user);
+  console.log(req.session);
+  next();
+});
 
 /** specify the strategy to be used in passport */
 /** @UserModel passport-local-mongoose strategy was implemented*/

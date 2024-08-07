@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
-import { ClientModel } from "./ClientSchema.js";
-import { ProjectModel } from "./ProjectSchema.js";
+
 const { Schema } = mongoose;
 
 const InvoiceSchema = new Schema({
@@ -14,14 +13,14 @@ const InvoiceSchema = new Schema({
     required: true,
   },
 
-  //   client: {
-  //     type: Schema.Types.ObjectId,
-  //     ref: ClientModel,
-  //   },
+  client: {
+    type: Schema.Types.ObjectId,
+    ref: "ClientModel",
+  },
 
   project: {
     type: Schema.Types.ObjectId,
-    ref: ProjectModel,
+    ref: "ProjectModel",
   },
 
   tax: {

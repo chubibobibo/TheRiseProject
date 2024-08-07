@@ -16,6 +16,8 @@ export const addPayment = async (req, res) => {
 };
 
 //* get all payments
+/** populating a nested object */
+/**first populated data of invoice then inside the invoice property object, populated the project property (using ProjectModel) */
 export const getAllPayments = async (req, res) => {
   const allPayments = await PaymentModel.find({})
     .populate("invoice")
@@ -26,13 +28,6 @@ export const getAllPayments = async (req, res) => {
         model: "ProjectModel",
       },
     });
-  // .populate({
-  //   path: "invoice",
-  //   populate: {
-  //     path: "project",
-  //     model: "ProjectModel",
-  //   },
-  // });
   if (!allPayments) {
     throw new ExpressError("No payments found", 400);
   }

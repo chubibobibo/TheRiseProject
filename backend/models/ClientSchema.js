@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 import { UserModel } from "./UserSchema.js";
 import { SalesModel } from "./SalesSchema.js";
-import { ProjectModel } from "./ProjectSchema.js";
+// import { ProjectModel } from "./ProjectSchema.js";
 
 import fs from "fs";
 import { PaymentModel } from "./PaymentSchema.js";
@@ -34,8 +34,8 @@ const ClientSchema = new Schema({
     default: "person",
   },
   owner: {
-    type: Schema.Types.ObjectId,
-    ref: UserModel,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "UserModel",
   },
   address: {
     type: String,
@@ -84,20 +84,20 @@ const ClientSchema = new Schema({
     type: String,
   },
   sales: {
-    type: Schema.Types.ObjectId,
-    ref: SalesModel,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: " SalesModel",
   },
   project: {
-    type: Schema.Types.ObjectId,
-    ref: ProjectModel,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "ProjectModel",
   },
   payments: {
-    type: Schema.Types.ObjectId,
-    ref: PaymentModel,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "PaymentModel",
   },
   invoice: {
-    type: Schema.Types.ObjectId,
-    ref: InvoiceModel,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: " InvoiceModel",
   },
 });
 

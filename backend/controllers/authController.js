@@ -41,3 +41,12 @@ export const login = async (req, res) => {
   }
   res.status(200).json({ message: "User found", foundUser });
 };
+
+/**currentLoggedUser */
+export const currentLoggedUser = async (req, res) => {
+  const foundUser = await UserModel.findOne(req.user._id);
+  if (!foundUser) {
+    throw new ExpressError("No user logged in", 400);
+  }
+  res.status(200).json({ message: "logged user", foundUser });
+};
