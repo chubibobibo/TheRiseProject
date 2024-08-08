@@ -56,6 +56,7 @@ const TaskSchema = new Schema({
 
   labels: {
     type: String,
+    enum: ["feedback", "bug", "enhancement", "design"],
   },
 
   startDate: {
