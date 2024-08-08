@@ -17,6 +17,7 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@tanstack/react-query": "^5.49.2",
     "axios": "^1.7.2",
+    "dayjs": "^1.11.12",
     "react": "^18.2.0",
     "react-big-calendar": "^1.13.1",
     "react-data-table-component": "^7.6.2",

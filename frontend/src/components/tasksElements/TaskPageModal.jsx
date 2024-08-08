@@ -12,6 +12,12 @@ import Wrapper from "../../assets/wrappers/ModalWrapper.js";
 /** Import the temporary tasks (will be replaced by data from an API) */
 import { TempTasks } from "../../utils/TempTasks.jsx";
 import { useState, useEffect, useContext } from "react";
+import axios from "axios";
+
+import day from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
+day.extend(advancedFormat);
+
 /**  context created in the parent component */
 import { TaskContext } from "../../pages/dashboardPages/TasksPage.jsx";
 
@@ -20,24 +26,28 @@ function TaskModal() {
   const [filteredData, setFilteredData] = useState({});
 
   /** obtaining data from context */
+  /** @taskContext from TasksPage.jsx contains the data toggle for the modal and the id of the specific tasks after mapping it */
   const newTaskData = useContext(TaskContext);
 
   /** save the taskId from context to a variable*/
   const taskData = newTaskData.isOpen.taskId;
 
-  /** filter the array of objects that contains our temporary data for all tasks that is equal to the
-   * id(taskData) received from context then set the state that will contain
-   * the filtered task using useEffect for every render */
+  /** @newTask contains the response from the API to search for a specific task depending on the _id passed with isOpen state */
   useEffect(() => {
-    const newData = TempTasks.filter((newTasks) => {
-      return newTasks.id === taskData;
-    });
-    const filteredTasks = () => {
-      //   console.log(newData);
-      setFilteredData(newData);
+    const singleTask = async () => {
+      const newTask = await axios.get(`/api/task/singleTask/${taskData}`);
+      setFilteredData(newTask);
     };
-    filteredTasks();
+    singleTask();
   }, []);
+
+  // console.log(filteredData);
+  const singleTaskData = filteredData?.data?.foundSingleTask;
+  console.log(singleTaskData);
+
+  /** formatting date from the response of API */
+  const startDate = day(singleTaskData?.startDate).format("MMM Do, YYYY");
+  const deadLineDate = day(singleTaskData?.deadline).format("MMM Do, YYYY");
 
   return (
     /** onClick event uses anonymous function because we are providing an argument to the setIsOpen state*/
@@ -50,7 +60,7 @@ function TaskModal() {
       ></div>
       <div className='centered'>
         <div className='modalHeader'>
-          <h5 className='heading'>{filteredData[0]?.task}</h5>
+          <h5 className='heading'>{singleTaskData?.title.toUpperCase()}</h5>
         </div>
         <div className='modal'>
           {/* button to close */}
@@ -63,11 +73,8 @@ function TaskModal() {
           {/** container for the task details */}
           <div className='content-container'>
             <div className='modal-content'>
-              <p>
-                This is a modal for a unique task having an id of{" "}
-                {filteredData[0]?.id}
-              </p>
-              <p>{filteredData[0]?.description}</p>
+              <p>{singleTaskData?.description}</p>
+
               <hr />
               <p>Checklist 0/0</p>
               <div className='add-item-input'>
@@ -100,13 +107,29 @@ function TaskModal() {
               </div>
               {/** container for the details on the author located below the avatar and name of author*/}
               <div className='author-details-container'>
-                <p className='author-details'>Milestone : Beta Release</p>
-                <p className='author-details'>Start Date : Add Start date</p>
-                <p className='author-details'>Start Deadline : 15-05-2014</p>
-                <p className='author-details'>Priority: Critical</p>
-                <p className='author-details'>Label: Feedback</p>
                 <p className='author-details'>
-                  Collaborators: Add Collaborators
+                  Milestone :{" "}
+                  {singleTaskData?.milestone.charAt(0).toUpperCase() +
+                    singleTaskData?.milestone.slice(1)}
+                </p>
+                <p className='author-details'>Start Date : {startDate}</p>
+                <p className='author-details'>
+                  Start Deadline : {deadLineDate}
+                </p>
+                <p className='author-details'>
+                  Priority:{" "}
+                  {singleTaskData?.priority.charAt(0).toUpperCase() +
+                    singleTaskData?.priority.slice(1)}
+                </p>
+                <p className='author-details'>
+                  Label:{" "}
+                  {singleTaskData?.labels.charAt(0).toUpperCase() +
+                    singleTaskData?.labels.slice(1)}
+                </p>
+                <p className='author-details'>
+                  Collaborators:{" "}
+                  {singleTaskData?.collaborators.charAt(0).toUpperCase() +
+                    singleTaskData?.collaborators.slice(1)}
                 </p>
                 <button>Start Timer</button>
                 <p className='author-details'>Total time logged : 00:00:00</p>

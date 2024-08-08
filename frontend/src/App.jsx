@@ -25,6 +25,7 @@ import { loader as getAllClientsLoader } from "./components/clientPageElements/C
 import { loader as getPaymentLoader } from "./pages/dashboardPages/SalesPage";
 import { loader as getAllClientsAndProjects } from "./pages/dashboardPages/ClientPage";
 import { loader as getCurrentLoggedUserLoader } from "./pages/DashboardLayout";
+import { loader as getAllTasksLoader } from "./pages/dashboardPages/TasksPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -73,6 +74,7 @@ function App() {
             {
               path: "tasks",
               element: <TasksPage />,
+              loader: getAllTasksLoader,
             },
             {
               path: "clients",

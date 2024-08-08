@@ -75,6 +75,16 @@ const Wrapper = styled.div`
     margin: 1rem;
   }
 
+  .feedback {
+    background-color: blue;
+    width: 6rem;
+    height: 1rem;
+    border-radius: 5px;
+    color: white;
+    justify-content: center;
+    margin: 1rem;
+  }
+
   .priority-container {
     display: flex;
     justify-content: start;

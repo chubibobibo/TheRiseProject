@@ -239,14 +239,18 @@ function AddTaskModal() {
                   <label className='label' htmlFor='labels'>
                     Labels
                   </label>
-                  <input
-                    id='labels'
-                    type='text'
-                    className='input'
+                  <select
                     name='labels'
-                    value={inputData.labels}
+                    id='labels'
                     onChange={handleChange}
-                  />
+                    className='select-input'
+                  >
+                    <option value=''>--Please choose an option--</option>
+                    <option value='feedback'>Feedback</option>
+                    <option value='bug'>Bug</option>
+                    <option value='enhancement'>Enhancement</option>
+                    <option value='design'>Design</option>
+                  </select>
                 </div>
                 <div className='form-inputs'>
                   <label className='label' htmlFor='startDate'>
