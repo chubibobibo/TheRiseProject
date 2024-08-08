@@ -17,6 +17,7 @@ import ClientPageClient from "./components/clientPageElements/ClientPageClient";
 import ClientPageContacts from "./components/clientPageElements/ClientPageContacts";
 import TasksPage from "./pages/dashboardPages/TasksPage";
 import SalesPage from "./pages/dashboardPages/SalesPage";
+import SubscriptionPage from "./pages/dashboardPages/SubscriptionPage";
 
 /** action functions */
 import { action as loginAction } from "./pages/authPages/LoginPage";
@@ -26,6 +27,7 @@ import { loader as getPaymentLoader } from "./pages/dashboardPages/SalesPage";
 import { loader as getAllClientsAndProjects } from "./pages/dashboardPages/ClientPage";
 import { loader as getCurrentLoggedUserLoader } from "./pages/DashboardLayout";
 import { loader as getAllTasksLoader } from "./pages/dashboardPages/TasksPage";
+import { loader as getAllDashboardTasksLoader } from "./pages/dashboardPages/DashboardTaskPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -57,6 +59,7 @@ function App() {
             {
               index: true,
               element: <DashboardTaskPage />,
+              loader: getAllDashboardTasksLoader,
             },
             {
               path: "view-dashboard",
@@ -94,6 +97,10 @@ function App() {
               path: "sales",
               element: <SalesPage />,
               loader: getPaymentLoader,
+            },
+            {
+              path: "subscriptions",
+              element: <SubscriptionPage />,
             },
           ],
         },

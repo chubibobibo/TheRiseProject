@@ -25,8 +25,24 @@ import { RxPerson } from "react-icons/rx";
 import { MdOutlineWbSunny } from "react-icons/md";
 import { FaSearch } from "react-icons/fa";
 
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useLoaderData } from "react-router-dom";
+
 /**creating context to pass data */
 export const DashboardTaskContext = createContext();
+
+/** loader function to obtain all tasks*/
+export const loader = async () => {
+  try {
+    const data = await axios.get("/api/task/allTasks");
+    return data;
+  } catch (err) {
+    console.log(err);
+    toast.error(err?.response?.data?.message);
+    return err;
+  }
+};
 
 function DashboardTaskPage() {
   /** State to open and close modal dialog component */
@@ -36,7 +52,32 @@ function DashboardTaskPage() {
   const handleClick = (id) => {
     setIsOpen({ open: true, taskId: id });
   };
-  // console.log(isOpen.taskId);
+
+  /**obtain data from loader function */
+  const tasks = useLoaderData();
+  console.log(tasks);
+
+  /** Filtering of tasks */
+  /** @toDoTasks filters the data from API to return tasks with status "to do" */
+  const toDoTasks = tasks?.data?.foundTasks.filter((newTodos) => {
+    return newTodos.status === "to do";
+  });
+
+  /** @inProgress filters data from the API to return tasks with status 'in progress' */
+  const inProgress = tasks?.data?.foundTasks.filter((inProgressTask) => {
+    return inProgressTask.status === "in progress";
+  });
+
+  /** @reviewTasks filters data from the API to return tasks with status 'review' */
+  const reviewTasks = tasks?.data?.foundTasks.filter((reviewTask) => {
+    return reviewTask.status === "review";
+  });
+
+  /** @doneTasks filters data from the API to return tasks with status 'done' */
+  const doneTasks = tasks?.data?.foundTasks.filter((doneTask) => {
+    return doneTask.status === "done";
+  });
+
   return (
     <Wrapper>
       {/** wrap the components that needs data inside the context provider */}
@@ -103,14 +144,18 @@ function DashboardTaskPage() {
               <div className='content-column'>
                 {/* mapped imported TempTasks which is an array of objects containing tasks and categories   */}
                 {/* for every iteration of the items, render the TaskElements component and provide props */}
-                {TempTasks.map((newTempTasks, idx) => {
+                {toDoTasks.map((newTempTasks, idx) => {
                   return (
                     <TaskElements
-                      task={newTempTasks.task}
-                      category={newTempTasks.category}
+                      task={
+                        newTempTasks?.title.charAt(0).toUpperCase() +
+                        newTempTasks?.title.slice(1)
+                      }
+                      category={newTempTasks?.labels}
                       key={idx}
+                      priority={newTempTasks.priority}
                       click={() => {
-                        handleClick(newTempTasks.id);
+                        handleClick(newTempTasks?._id);
                       }}
                     />
                   );
@@ -120,14 +165,18 @@ function DashboardTaskPage() {
               <div className='content-column'>
                 {/* mapped imported TempTasks which is an array of objects containing tasks and categories   */}
                 {/* for every iteration of the items, render the TaskElements component and provide props */}
-                {TempTasks.map((newTempTasks, idx) => {
+                {inProgress.map((newTempTasks, idx) => {
                   return (
                     <TaskElements
-                      task={newTempTasks.task}
-                      category={newTempTasks.category}
+                      task={
+                        newTempTasks.title.charAt(0).toUpperCase() +
+                        newTempTasks.title.slice(1)
+                      }
+                      category={newTempTasks.labels}
                       key={idx}
+                      priority={newTempTasks.priority}
                       click={() => {
-                        handleClick(newTempTasks.id);
+                        handleClick(newTempTasks._id);
                       }}
                     />
                   );
@@ -137,14 +186,18 @@ function DashboardTaskPage() {
               <div className='content-column'>
                 {/* mapped imported TempTasks which is an array of objects containing tasks and categories   */}
                 {/* for every iteration of the items, render the TaskElements component and provide props */}
-                {TempTasks.map((newTempTasks, idx) => {
+                {reviewTasks.map((newTempTasks, idx) => {
                   return (
                     <TaskElements
-                      task={newTempTasks.task}
-                      category={newTempTasks.category}
+                      task={
+                        newTempTasks.title.charAt(0).toUpperCase() +
+                        newTempTasks.title.slice(1)
+                      }
+                      category={newTempTasks.labels}
                       key={idx}
+                      priority={newTempTasks.priority}
                       click={() => {
-                        handleClick(newTempTasks.id);
+                        handleClick(newTempTasks._id);
                       }}
                     />
                   );
@@ -154,14 +207,18 @@ function DashboardTaskPage() {
               <div className='content-column'>
                 {/* mapped imported TempTasks which is an array of objects containing tasks and categories   */}
                 {/* for every iteration of the items, render the TaskElements component and provide props */}
-                {TempTasks.map((newTempTasks, idx) => {
+                {doneTasks.map((newTempTasks, idx) => {
                   return (
                     <TaskElements
-                      task={newTempTasks.task}
-                      category={newTempTasks.category}
+                      task={
+                        newTempTasks.title.charAt(0).toUpperCase() +
+                        newTempTasks.title.slice(1)
+                      }
+                      category={newTempTasks.labels}
                       key={idx}
+                      priority={newTempTasks.priority}
                       click={() => {
-                        handleClick(newTempTasks.id);
+                        handleClick(newTempTasks._id);
                       }}
                     />
                   );

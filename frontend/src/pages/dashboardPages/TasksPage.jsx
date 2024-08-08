@@ -177,7 +177,7 @@ function TasksPage() {
                       }
                       category={newTempTasks.labels}
                       key={idx}
-                      milestone={newTempTasks.milestone}
+                      priority={newTempTasks.priority}
                       click={() => {
                         handleClick(newTempTasks._id);
                       }}
@@ -198,6 +198,7 @@ function TasksPage() {
                       }
                       category={newTempTasks.labels}
                       key={idx}
+                      priority={newTempTasks.priority}
                       click={() => {
                         handleClick(newTempTasks._id);
                       }}
@@ -218,6 +219,7 @@ function TasksPage() {
                       }
                       category={newTempTasks.labels}
                       key={idx}
+                      priority={newTempTasks.priority}
                       click={() => {
                         handleClick(newTempTasks._id);
                       }}
@@ -238,6 +240,7 @@ function TasksPage() {
                       }
                       category={newTempTasks.labels}
                       key={idx}
+                      priority={newTempTasks.priority}
                       click={() => {
                         handleClick(newTempTasks._id);
                       }}
