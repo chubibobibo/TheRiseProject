@@ -14,7 +14,7 @@ export const addTask = async (req, res) => {
 };
 
 export const getAllTasks = async (req, res) => {
-  const foundTasks = await TaskModel.find({});
+  const foundTasks = await TaskModel.find({}).populate("comment");
   if (!foundTasks) {
     throw new ExpressError("No tasks found", 400);
   }
@@ -26,7 +26,18 @@ export const getSingleTask = async (req, res) => {
   if (!id) {
     throw new ExpressError("No task id found", 400);
   }
-  const foundSingleTask = await TaskModel.findById(id);
+
+  /** populate the comment property */
+  /** chaining populating author property referencing the UserModel */
+  const foundSingleTask = await TaskModel.findById(id)
+    .populate("comment")
+    .populate({
+      path: "comment",
+      populate: {
+        path: "author",
+        model: "UserModel",
+      },
+    });
   if (!foundSingleTask) {
     throw new ExpressError("Cannot find that task");
   }

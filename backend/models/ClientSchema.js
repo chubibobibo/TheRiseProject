@@ -97,7 +97,7 @@ const ClientSchema = new Schema({
   },
   invoice: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: " InvoiceModel",
+    ref: "InvoiceModel",
   },
 });
 

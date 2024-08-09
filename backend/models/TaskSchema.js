@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { CommentModel } from "./Comments.js";
 
 import { relatedTask } from "../utils/relatedTask.js";
 console.log(Object.values(relatedTask));
@@ -70,10 +71,17 @@ const TaskSchema = new Schema({
   },
 
   recurring: {
-    // type: String,
-    // enum: ["true", "false"],
-    type: Boolean,
+    type: String,
+    enum: ["true", "false"],
+    // type: Boolean,
   },
+
+  comment: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "CommentModel",
+    },
+  ],
 });
 
 export const TaskModel = new mongoose.model("TaskModel", TaskSchema);

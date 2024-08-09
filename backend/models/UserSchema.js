@@ -31,10 +31,27 @@ const UserSchema = new Schema({
     type: String,
     enum: Object.values(roles) /** returns the values of objects in an array */,
   },
+
+  avatarUrl: {
+    type: String,
+  },
+
+  avatarPublicId: {
+    type: String,
+  },
 });
 
 /**implementing passport-local-mongoose to allow different methods to authenticate user */
 /**allows creation of secure passwords automatically*/
-UserSchema.plugin(passportLocalMongoose);
+/** @errorMessages customized error messages when logging in. This needs to be handled in login route*/
+UserSchema.plugin(passportLocalMongoose, {
+  errorMessages: {
+    MissingUsernameError: "No username was given",
+    MissingPasswordError: "No password was given",
+    IncorrectPasswordError: "Username or password is incorrect",
+    IncorrectUsernameError: "Username or password is incorrect",
+    UserExistsError: "A user with the given username is already registered",
+  },
+});
 
 export const UserModel = mongoose.model("UserModel", UserSchema);

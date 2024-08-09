@@ -28,14 +28,24 @@ const apiLimiter = rateLimit({
 
 router.get("/currentLoggedUser", currentLoggedUser);
 router.post("/register", registerValidation, register);
-router.post(
-  "/login",
-  loginValidation,
-  apiLimiter,
-  passport.authenticate("local", {
-    failureMessage: true,
-  }),
-  login
-);
+router.post("/login", loginValidation, apiLimiter, (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: info.message || "Invalid username or password.",
+      });
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err); // Handle any errors during login
+      }
+      return login(req, res); // Proceed to your login controller if authentication is successful
+    });
+  })(req, res, next);
+});
 
 export default router;
