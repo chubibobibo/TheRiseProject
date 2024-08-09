@@ -19,6 +19,8 @@ import clientRoutes from "./routes/clientRoutes.js";
 import invoiceRoutes from "./routes/invoiceRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 import projectRoutes from "./routes/projectRoutes.js";
+import taskRoutes from "./routes/taskRoutes.js";
+import commentRoutes from "./routes/commentRoutes.js";
 
 app.use(express.json()); /** parsing json data */
 app.use(cors());
@@ -90,6 +92,8 @@ app.use("/api/clients/", clientRoutes);
 app.use("/api/invoice/", invoiceRoutes);
 app.use("/api/payment/", paymentRoutes);
 app.use("/api/project/", projectRoutes);
+app.use("/api/task/", taskRoutes);
+app.use("/api/comments/", commentRoutes);
 
 /** error handling */
 /** handling errors for page not found */

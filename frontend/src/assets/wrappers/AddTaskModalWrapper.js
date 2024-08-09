@@ -18,12 +18,12 @@ const Wrapper = styled.div`
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -45%);
+    transform: translate(-50%, -50%);
   }
 
   /** modal container*/
   .modal {
-    width: 40rem;
+    width: 60rem;
     height: 40rem;
     background: #2f3541;
     z-index: 10;
@@ -34,59 +34,21 @@ const Wrapper = styled.div`
     overflow-x: hidden;
     padding: 2px;
     display: flex;
-    justify-content: center;
-
-    .form-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 50rem;
-      gap: 1rem;
-
-      .form-inputs {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
-    }
-
-    .input {
-      width: 30rem;
-      height: 2rem;
-    }
-
-    .textInput {
-      width: 30rem;
-    }
-    .form-label {
-      color: #7c8fa9;
-      display: flex;
-      margin-right: 11rem;
-      margin-top: 1rem;
-    }
-
-    .radio-group {
-      margin-top: 1rem;
-      display: flex;
-      gap: 2rem;
-    }
+    flex-direction: column;
+    align-items: center;
   }
 
   /** header of modal displays the title of the task */
   .modalHeader {
     height: 50px;
     background: #292e38;
-    color: white;
+    color: #7c8fa9;
     overflow: hidden;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
     display: flex;
-    justify-content: start;
     align-items: center;
-  }
-
-  .form-row {
-    display: flex;
+    justify-content: start;
   }
 
   /** Heading text (title of the task) */
@@ -97,6 +59,7 @@ const Wrapper = styled.div`
     font-weight: 500;
     font-size: 30px;
     text-align: center;
+    margin-left: 1rem;
   }
 
   .modalContent {
@@ -146,27 +109,44 @@ const Wrapper = styled.div`
 
   /** container for content of the modal under the header */
   .content-container {
-    /* display: grid;
-    grid-template-columns: 2fr 1fr; */
     display: flex;
-    max-width: 200%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .form-inputs {
+      display: flex;
+      flex-direction: column;
+      width: 120%;
+    }
+
+    .label {
+      grid-area: label;
+      margin-top: 1rem;
+    }
+
+    .input {
+      grid-area: input;
+      height: 2rem;
+    }
+
+    .select-input {
+      height: 2rem;
+    }
   }
 
   /** Content of the modal for tasks (right side) */
   .modal-content {
-    /* padding: 10px; */
+    padding: 10px;
     font-size: 22px;
     color: #7c8fa9;
-    /* text-align: left; */
-    .userAvatar {
-      height: 2.5rem;
-      width: 2.5rem;
-    }
+    text-align: left;
   }
 
   .btn-container {
     display: flex;
-    justify-content: end;
+    justify-content: start;
+    margin-top: 1rem;
   }
 
   .button {

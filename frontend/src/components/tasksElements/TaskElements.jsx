@@ -7,9 +7,7 @@ import UserAvatar from "../../components/navigationBar/UserAvatar.jsx";
 
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 
-function TaskElements({ task, category, click }) {
-  /** State to handle the rendering of the modal when a task is clicked */
-  // const [isOpen, setIsOpen] = useState(false);
+function TaskElements({ task, category, click, priority }) {
   return (
     <Wrapper>
       <div className='content-element' onClick={click}>
@@ -18,15 +16,22 @@ function TaskElements({ task, category, click }) {
           <span className='userAvatar'>
             <UserAvatar />
           </span>
-          <span style={{ fontSize: "25px" }}>{task}</span>
+          <span>{task}</span>
         </div>
         <div className='priority-container'>
-          <span className='priority'>
-            <AiOutlineExclamationCircle />
-          </span>
+          {priority === "critical" && (
+            <span className='priority'>
+              <AiOutlineExclamationCircle />
+            </span>
+          )}
+
           <span
             className={category}
-            style={{ textTransform: "capitalize", padding: "5px" }}
+            style={{
+              textTransform: "capitalize",
+              padding: "5px",
+              fontSize: "15px",
+            }}
           >
             {category}
           </span>
