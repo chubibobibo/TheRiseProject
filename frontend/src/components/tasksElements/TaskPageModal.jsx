@@ -13,10 +13,14 @@ import Wrapper from "../../assets/wrappers/ModalWrapper.js";
 import { TempTasks } from "../../utils/TempTasks.jsx";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { Form } from "react-router-dom";
 
 import day from "dayjs";
+import utc from "dayjs/plugin/utc";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 day.extend(advancedFormat);
+day.extend(utc); /** Formatting time from UTC */
 
 /**  context created in the parent component */
 import { TaskContext } from "../../pages/dashboardPages/TasksPage.jsx";
@@ -31,6 +35,24 @@ function TaskModal() {
 
   /** save the taskId from context to a variable*/
   const taskData = newTaskData.isOpen.taskId;
+
+  /* state to handle the input data from text fields */
+  const [inputData, setInputData] = useState({ comment: "" });
+  const handleChange = (e) => {
+    setInputData({ comment: e.target.value });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post(`/api/comments/addComment/${taskData}`, inputData);
+      toast.success("Comment submitted");
+      newTaskData.setIsOpen(false);
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.response?.data?.message);
+      return err;
+    }
+  };
 
   /** @newTask contains the response from the API to search for a specific task depending on the _id passed with isOpen state */
   useEffect(() => {
@@ -96,17 +118,19 @@ function TaskModal() {
                 <UserAvatar />
               </div>
               <div>
-                <TextAreaInputField />
+                <Form method='post' onSubmit={handleSubmit}>
+                  <TextAreaInputField handleChange={handleChange} />
+                </Form>
               </div>
             </div>
             {/** Container for the details of the author of the task  (right side)*/}
             <div className='author-container'>
-              <div className='userAvatar'>
-                <UserAvatar />
-                <span className='author-name'>John Doe</span>
-              </div>
               {/** container for the details on the author located below the avatar and name of author*/}
               <div className='author-details-container'>
+                <div className='userAvatar'>
+                  <UserAvatar />
+                  <span className='author-name'>John Doe</span>
+                </div>
                 <p className='author-details'>
                   Milestone :{" "}
                   {singleTaskData?.milestone.charAt(0).toUpperCase() +
@@ -144,12 +168,39 @@ function TaskModal() {
             <p style={{ color: " #668F9F" }}>Activity</p>
           </div>
           <div className='activities-container'>
-            <div className='user-avatar-activities'>
+            {/* <div className='user-avatar-activities'>
               <UserAvatar />
               <p className='author-name'>John Doe</p>
             </div>
             <div>
               <p className='author-name'>{filteredData[0]?.task}</p>
+            </div> */}
+            <div className='comment-section'>
+              {singleTaskData?.comment.map((newComment, idx) => {
+                /** formatting time from UTC */
+                const commentTime = day(newComment.createdAt).format(
+                  "YYYY-MM-DD HH:mm:ss"
+                );
+                return (
+                  <div key={idx} className='comments'>
+                    <div className='author-container'>
+                      {/** dynamically render avatar else render a default avatar */}
+                      {newComment?.author?.avatarUrl ? (
+                        newComment?.author?.avatarUrl
+                      ) : (
+                        <div className='user-avatar-activities'>
+                          <UserAvatar />
+                        </div>
+                      )}
+                      <p className='author'>
+                        {newComment?.author?.username.toUpperCase()}
+                      </p>
+                      <sub className='comment-time'>{commentTime}</sub>
+                    </div>
+                    <p className='comment-comment'>{newComment.comment}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

@@ -57,7 +57,7 @@ function AddTaskModal() {
         status: "",
         startDate: "",
         deadline: "",
-        recurring: null,
+        recurring: "",
         priority: "",
         labels: "",
       });

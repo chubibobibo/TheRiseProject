@@ -16,7 +16,7 @@ function TaskElements({ task, category, click, priority }) {
           <span className='userAvatar'>
             <UserAvatar />
           </span>
-          <span style={{ fontSize: "25px" }}>{task}</span>
+          <span>{task}</span>
         </div>
         <div className='priority-container'>
           {priority === "critical" && (
@@ -27,7 +27,11 @@ function TaskElements({ task, category, click, priority }) {
 
           <span
             className={category}
-            style={{ textTransform: "capitalize", padding: "5px" }}
+            style={{
+              textTransform: "capitalize",
+              padding: "5px",
+              fontSize: "15px",
+            }}
           >
             {category}
           </span>

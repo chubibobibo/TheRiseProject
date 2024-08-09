@@ -146,22 +146,22 @@ function TasksPage() {
             <div className='content-header'>
               <div className='column-header'>
                 <span className='span-header'>To Do</span>
-                <span className='span-header'>7</span>
+                <span className='span-header'>{toDoTasks.length}</span>
                 <div className='column-color-yellow'></div>
               </div>
               <div className='column-header'>
                 <span className='span-header'>In Progress</span>
-                <span className='span-header'>5</span>
+                <span className='span-header'>{inProgress.length}</span>
                 <div className='column-color-blue'></div>
               </div>
               <div className='column-header'>
                 <span className='span-header'>Review</span>
-                <span className='span-header'>8</span>
+                <span className='span-header'>{reviewTasks.length}</span>
                 <div className='column-color-purple'></div>
               </div>
               <div className='column-header'>
                 <span className='span-header'>Done</span>
-                <span className='span-header'>9</span>
+                <span className='span-header'>{doneTasks.length}</span>
                 <div className='column-color-cyan'></div>
               </div>
               {/* container for each column element of the boxes To do*/}

@@ -13,10 +13,14 @@ import Wrapper from "../../assets/wrappers/ModalWrapper.js";
 import { TempTasks } from "../../utils/TempTasks.jsx";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { Form } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import day from "dayjs";
+import utc from "dayjs/plugin/utc";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 day.extend(advancedFormat);
+day.extend(utc); /** Formatting time from UTC */
 
 /**  context created in the parent component */
 import { DashboardTaskContext } from "../../pages/dashboardPages/DashboardTaskPage.jsx";
@@ -33,25 +37,49 @@ function TaskModal() {
 
   /** save the taskId from context to a variable*/
   const taskData = data.isOpen.taskId;
+  console.log(taskData);
 
   /** filter the array of objects that contains our temporary data for all tasks that is equal to the
    * id(taskData) received from context then set the state that will contain
    * the filtered task using useEffect for every render */
+
+  /* state to handle the input data from text fields */
+  const [inputData, setInputData] = useState({ comment: "" });
+  const handleChange = (e) => {
+    setInputData({ comment: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post(`/api/comments/addComment/${taskData}`, inputData);
+      toast.success("Comment submitted");
+      data.setIsOpen(false);
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.response?.data?.message);
+      return err;
+    }
+  };
+
   useEffect(() => {
     const singleTask = async () => {
       const newTask = await axios.get(`/api/task/singleTask/${taskData}`);
       setFilteredData(newTask);
+      console.log(filteredData);
     };
     singleTask();
   }, []);
 
   // console.log(filteredData);
   const singleTaskData = filteredData?.data?.foundSingleTask;
-  console.log(singleTaskData);
+  // console.log(singleTaskData?.comment);
 
   /** formatting date from the response of API */
   const startDate = day(singleTaskData?.startDate).format("MMM Do, YYYY");
   const deadLineDate = day(singleTaskData?.deadline).format("MMM Do, YYYY");
+
+  // console.log(singleTaskData?.comment[0].comment);
 
   return (
     /** onClick event uses anonymous function because we are providing an argument to the setIsOpen state*/
@@ -71,7 +99,7 @@ function TaskModal() {
           {/** container for the task details */}
           <div className='content-container'>
             <div className='modal-content'>
-              <p>{singleTaskData?.description}</p>
+              <p className='description'>{singleTaskData?.description}</p>
               <hr />
               <p>Checklist 0/0</p>
               <div className='add-item-input'>
@@ -93,17 +121,23 @@ function TaskModal() {
                 <UserAvatar />
               </div>
               <div>
-                <TextAreaInputField />
+                <Form method='post' onSubmit={handleSubmit}>
+                  <TextAreaInputField
+                    inputData={inputData}
+                    setInputData={setInputData}
+                    handleChange={handleChange}
+                  />
+                </Form>
               </div>
             </div>
             {/** Container for the details of the author of the task  (right side)*/}
             <div className='author-container'>
-              <div className='userAvatar'>
-                <UserAvatar />
-                <span className='author-name'>John Doe</span>
-              </div>
               {/** container for the details on the author located below the avatar and name of author*/}
               <div className='author-details-container'>
+                <div className='userAvatar'>
+                  <UserAvatar />
+                  <span className='author-name'>John Doe</span>
+                </div>
                 <p className='author-details'>
                   Milestone :{" "}
                   {singleTaskData?.milestone.charAt(0).toUpperCase() +
@@ -141,12 +175,38 @@ function TaskModal() {
             <p style={{ color: " #668F9F" }}>Activity</p>
           </div>
           <div className='activities-container'>
-            <div className='user-avatar-activities'>
+            {/* <div className='user-avatar-activities'>
               <UserAvatar />
               <p className='author-name'>John Doe</p>
             </div>
             <div>
               <p className='author-name'>{filteredData[0]?.task}</p>
+            </div> */}
+            <div className='comment-section'>
+              {singleTaskData?.comment.map((newComment, idx) => {
+                const commentTime = day(newComment.createdAt).format(
+                  "YYYY-MM-DD HH:mm:ss"
+                );
+                return (
+                  <div key={idx} className='comments'>
+                    <div className='author-container'>
+                      {/** dynamically render avatar else render a default avatar */}
+                      {newComment?.author?.avatarUrl ? (
+                        newComment?.author?.avatarUrl
+                      ) : (
+                        <div className='user-avatar-activities'>
+                          <UserAvatar />
+                        </div>
+                      )}
+                      <p className='author'>
+                        {newComment?.author?.username.toUpperCase()}
+                      </p>
+                      <sub className='comment-time'>{commentTime}</sub>
+                    </div>
+                    <p className='comment-comment'>{newComment.comment}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

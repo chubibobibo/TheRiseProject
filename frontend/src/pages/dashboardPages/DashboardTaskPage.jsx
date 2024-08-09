@@ -226,7 +226,6 @@ function DashboardTaskPage() {
               </div>
             </div>
           </div>
-          <div></div>
         </div>
       </DashboardTaskContext.Provider>
     </Wrapper>

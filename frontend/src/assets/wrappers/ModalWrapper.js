@@ -100,48 +100,14 @@ const Wrapper = styled.div`
     transform: translate(4px, -4px);
   }
 
-  /* .deleteBtn {
-    margin-top: 10px;
-    cursor: pointer;
-    font-weight: 500;
-    padding: 11px 28px;
-    border-radius: 12px;
-    font-size: 0.8rem;
-    border: none;
-    color: #fff;
-    background: #ff3e4e;
-    transition: all 0.25s ease;
-  } */
-
-  /* .deleteBtn:hover {
-    box-shadow: 0 10px 20px -10px rgba(255, 62, 78, 0.6);
-    transform: translateY(-5px);
-    background: #ff3e4e;
-  } */
-
-  /* .cancelBtn {
-    margin-top: 10px;
-    cursor: pointer;
-    font-weight: 500;
-    padding: 11px 28px;
-    border-radius: 12px;
-    font-size: 0.8rem;
-    border: none;
-    color: #2c3e50;
-    background: #fcfcfc;
-    transition: all 0.25s ease;
-  } */
-  /* 
-  .cancelBtn:hover {
-    box-shadow: none;
-    transform: none;
-    background: whitesmoke;
-  } */
-
   /** container for content of the modal under the header */
   .content-container {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 5fr 4fr;
+
+    p {
+      font-size: 18px;
+    }
   }
 
   /** Content of the modal for tasks (right side) */
@@ -160,7 +126,7 @@ const Wrapper = styled.div`
   .author-container {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 4fr;
+    grid-template-rows: 5fr;
   }
 
   /** User avatar in the author-container */
@@ -214,6 +180,32 @@ const Wrapper = styled.div`
   .user-avatar-activities {
     display: flex;
     justify-content: start;
+  }
+
+  .comment-section {
+    width: 100%;
+
+    .comments {
+      margin: 1rem;
+      border-bottom: 1px solid gray;
+      color: #898fa9;
+    }
+
+    .author {
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
+
+  .author-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .author-details-container {
+    margin-top: -5rem;
   }
 `;
 

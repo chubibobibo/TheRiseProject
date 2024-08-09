@@ -33,6 +33,7 @@ const Wrapper = styled.div`
     margin: 2px;
     span {
       margin-left: 1rem;
+      font-size: 18px;
       /* width: 10rem; */
     }
   }
@@ -43,6 +44,7 @@ const Wrapper = styled.div`
     border-radius: 100px;
   }
 
+  /** styles for the label colors */
   .design {
     background-color: green;
     width: 3rem;
@@ -77,7 +79,7 @@ const Wrapper = styled.div`
 
   .feedback {
     background-color: blue;
-    width: 6rem;
+    width: 5rem;
     height: 1rem;
     border-radius: 5px;
     color: white;

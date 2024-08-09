@@ -97,10 +97,10 @@ const Wrapper = styled.div`
     grid-template-rows: 1fr 4fr;
     grid-template-columns: 1fr 1fr 1fr 1fr;
 
-    .span-header {
+    /* .span-header {
       margin: 10px;
-      font-size: 20px;
-    }
+      font-size: 15px;
+    } */
   }
   .column-header {
     /* border: 1px solid black; */
@@ -118,7 +118,7 @@ const Wrapper = styled.div`
     justify-content: center;
 
     .span-header {
-      font-size: 25px;
+      font-size: 20px;
     }
   }
 

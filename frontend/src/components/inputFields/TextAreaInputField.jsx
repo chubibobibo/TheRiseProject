@@ -1,5 +1,9 @@
 import Wrapper from "../../assets/wrappers/TextAreaInputFieldWrapper.js";
-function TextAreaInputField() {
+/** react icons */
+import { FiSend } from "react-icons/fi";
+import { CiCamera } from "react-icons/ci";
+
+function TextAreaInputField({ inputData, setInputData, handleChange }) {
   return (
     <Wrapper>
       <textarea
@@ -7,12 +11,17 @@ function TextAreaInputField() {
         cols={10}
         placeholder='Comment'
         className='comment-input'
+        onChange={handleChange}
       />
-      <div>
-        <button>Upload File</button>
-      </div>
-      <div>
-        <button>Post Comment</button>
+      <div className='button-container'>
+        <button className='button' type='button'>
+          <CiCamera size={"1rem"} />
+          Upload File
+        </button>
+        <button type="'submit" className='button'>
+          <FiSend size={"1rem"} />
+          Post Comment
+        </button>
       </div>
     </Wrapper>
   );
